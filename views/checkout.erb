@@ -6,29 +6,29 @@
 <script src="https://js.braintreegateway.com/web/3.42.0/js/data-collector.min.js"></script>
 
 <!-- PAYPAL -->
-<script src="https://www.paypalobjects.com/api/checkout.js" data-version-4 log-level="warn"></script>
-<script src="https://js.braintreegateway.com/web/3.42.0/js/paypal-checkout.min.js"></script>
+<!-- <script src="https://www.paypalobjects.com/api/checkout.js" data-version-4 log-level="warn"></script>
+<script src="https://js.braintreegateway.com/web/3.42.0/js/paypal-checkout.min.js"></script> -->
 
 <!-- VENMO -->
-<script src="https://js.braintreegateway.com/web/3.42.0/js/venmo.min.js"></script>
+<!-- <script src="https://js.braintreegateway.com/web/3.42.0/js/venmo.min.js"></script> -->
 
 <!-- APPLE PAY -->
-<script src="https://js.braintreegateway.com/web/3.42.0/js/apple-pay.min.js"></script>
+<!-- <script src="https://js.braintreegateway.com/web/3.42.0/js/apple-pay.min.js"></script> -->
 
 <!-- GOOGLE PAY -->
-<script src="https://pay.google.com/gp/p/js/pay.js"></script>
-<script src="https://js.braintreegateway.com/web/3.42.0/js/google-payment.min.js"></script>
+<!-- <script src="https://pay.google.com/gp/p/js/pay.js"></script>
+<script src="https://js.braintreegateway.com/web/3.42.0/js/google-payment.min.js"></script> -->
 
 <!-- VISA CHECKOUT -->
-<script src="https://js.braintreegateway.com/web/3.42.0/js/visa-checkout.min.js"></script>
-<script src="https://sandbox-assets.secure.checkout.visa.com/checkout-widget/resources/js/integration/v1/sdk.js"></script>
+<!-- <script src="https://js.braintreegateway.com/web/3.42.0/js/visa-checkout.min.js"></script>
+<script src="https://sandbox-assets.secure.checkout.visa.com/checkout-widget/resources/js/integration/v1/sdk.js"></script> -->
 
 <!-- MASTERPASS -->
-<script src="https://js.braintreegateway.com/web/3.42.0/js/masterpass.min.js"></script>
+<!-- <script src="https://js.braintreegateway.com/web/3.42.0/js/masterpass.min.js"></script> -->
 
 <!-- ACH -->
-<script src="https://js.braintreegateway.com/web/3.42.0/js/client.min.js"></script>
-<script src="https://js.braintreegateway.com/web/3.42.0/js/us-bank-account.min.js"></script>
+<!-- <script src="https://js.braintreegateway.com/web/3.42.0/js/client.min.js"></script>
+<script src="https://js.braintreegateway.com/web/3.42.0/js/us-bank-account.min.js"></script> -->
 
 
 <div class="container-fluid">
@@ -132,7 +132,7 @@
       </div>
     </div>
     <footer class="panel__footer">
-      <button class="pay-button">Pay</button>
+      <button class="pay-button">Pay with Card</button>
     </footer>
   </div>
 </form>
@@ -264,18 +264,19 @@ braintree.hostedFields.create({
 
       submitButton.removeAttribute('disabled');
 
-      hostedFields.on('fieldEvent', function (event) {
-        if (event.target.fieldKey !== 'number') { return; }
-
-        if (event.card) {
-          cvvLabel.innerHTML = event.card.code.name;
-        } else {
-          cvvLabel.innerHTML = 'CVV';
-        }
-      });
+      // hostedFields.on('fieldEvent', function (event) {
+      //   if (event.target.fieldKey !== 'number') { return; }
+      //
+      //   if (event.card) {
+      //     cvvLabel.innerHTML = event.card.code.name;
+      //   } else {
+      //     cvvLabel.innerHTML = 'CVV';
+      //   }
+      // });
 
       submitButton.onclick = function() {
         event.preventDefault();
+
         hostedFields.tokenize(function (err, payload) {
         if (err) {
           if (err.type === 'CUSTOMER') {
@@ -529,12 +530,12 @@ braintree.hostedFields.create({
 
 
 
-function serverSubmit(payload) {
-  $('#payment_method_nonce').val(payload.nonce);
-  console.log(JSON.stringify(payload));
-  alert(JSON.stringify(payload));
-  document.getElementById("credit_card_form").submit();
-}
+// function serverSubmit(payload) {
+//   $('#payment_method_nonce').val(payload.nonce);
+//   console.log(JSON.stringify(payload));
+//   alert(JSON.stringify(payload));
+//   document.getElementById("credit_card_form").submit();
+// }
 
 // function displayForm(c) {
 //        if (c.value == "1") {
