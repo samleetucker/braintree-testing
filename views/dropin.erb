@@ -1,0 +1,32 @@
+<script src="https://js.braintreegateway.com/web/dropin/1.16.0/js/dropin.min.js"></script>
+
+
+<body>
+  <div id="dropin-container"></div>
+  <button id="submit-button">Request payment method</button>
+  <script>
+    var button = document.querySelector('#submit-button');
+
+    braintree.dropin.create({
+      authorization: '<%= @client_token %>',
+      selector: '#dropin-container',
+      paypal: {
+        flow: 'checkout',
+        amount: '10.00',
+        currency: 'USD'
+      },
+      dataCollector: {
+        kount: true // Required if Kount fraud data collection is enabled
+      }
+    }, function (createErr, instance) {
+      console.log(createErr);
+      console.log(instance._client.getConfiguration().gatewayConfiguration.kount)
+      button.addEventListener('click', function () {
+
+        instance.requestPaymentMethod(function (requestPaymentMethodErr, payload) {
+          console.log(payload);
+        });
+      });
+    });
+  </script>
+</body>

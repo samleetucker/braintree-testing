@@ -1,0 +1,656 @@
+<link rel="stylesheet" type="text/css" href="./style.css">
+
+<!-- MAIN -->
+<script src="https://js.braintreegateway.com/web/3.42.0/js/client.min.js"></script>
+<script src="https://js.braintreegateway.com/web/3.42.0/js/hosted-fields.min.js"></script>
+<script src="https://js.braintreegateway.com/web/3.42.0/js/data-collector.min.js"></script>
+
+<!-- PAYPAL -->
+<script src="https://www.paypalobjects.com/api/checkout.js" data-version-4 log-level="warn"></script>
+<script src="https://js.braintreegateway.com/web/3.42.0/js/paypal-checkout.min.js"></script>
+
+<!-- VENMO -->
+<script src="https://js.braintreegateway.com/web/3.42.0/js/venmo.min.js"></script>
+
+<!-- APPLE PAY -->
+<script src="https://js.braintreegateway.com/web/3.42.0/js/apple-pay.min.js"></script>
+
+<!-- GOOGLE PAY -->
+<script src="https://pay.google.com/gp/p/js/pay.js"></script>
+<script src="https://js.braintreegateway.com/web/3.42.0/js/google-payment.min.js"></script>
+
+<!-- VISA CHECKOUT -->
+<script src="https://js.braintreegateway.com/web/3.42.0/js/visa-checkout.min.js"></script>
+<script src="https://sandbox-assets.secure.checkout.visa.com/checkout-widget/resources/js/integration/v1/sdk.js"></script>
+
+<!-- MASTERPASS -->
+<script src="https://js.braintreegateway.com/web/3.42.0/js/masterpass.min.js"></script>
+
+<!-- ACH -->
+<script src="https://js.braintreegateway.com/web/3.42.0/js/client.min.js"></script>
+<script src="https://js.braintreegateway.com/web/3.42.0/js/us-bank-account.min.js"></script>
+
+
+<div class="container-fluid">
+  <div>
+    <h1>Thank you for ordering!</h1>
+    <h3>Your total is $10. Please select your payment method.</h3>
+  </div>
+</div>
+  <!-- <div class="row">
+    <div class="col-md-4"> </div>
+    <div class="col-md-4">
+      <label><input value="1" type="radio" name="formselector" onclick="displayForm(this)">Via Credit Card</label>
+    </div>
+    <div class="col-md-4"></div>
+  </div>
+  <div class="row">
+    <div class="col-md-4"> </div>
+    <div class="col-md-4">
+      <label><input value="2" type="radio" name="formselector" onclick="displayForm(this)">Via Paypal</label>
+    </div>
+    <div class="col-md-4"></div>
+  </div>
+  <div class="row">
+    <div class="col-md-4"> </div>
+    <div  class="col-md-4">
+      <label><input value="3" type="radio" name="formselector"  onclick="displayForm(this)">Via Visa Checkout</label>
+    </div>
+    <div class="col-md-4"></div>
+  </div>
+ </form>
+ <div class="row">
+   <div class="col-md-4"> </div>
+   <div class="col-md-4">
+     <label><input value="4" type="radio" name="formselector" onclick="displayForm(this)">Via MasterPass</label>
+   </div>
+   <div class="col-md-4"></div>
+ </div>
+ <div class="row" >
+   <div class="col-md-4"> </div>
+   <div class="col-md-4">
+     <label id="venmo_radio_button" style="display:none"><input value="5" type="radio" name="formselector"  onclick="displayForm(this)">Via Venmo</label>
+   </div>
+   <div class="col-md-4"></div>
+ </div>
+ <div class="row" >
+   <div class="col-md-4"> </div>
+   <div class="col-md-4">
+     <label><input value="6" type="radio" name="formselector"  onclick="displayForm(this)">Via Bank Account</label>
+   </div>
+   <div class="col-md-4"></div>
+ </div> -->
+
+
+<!-- <form id="credit_card_form"  method="post" action="/checkout" role="form">
+  <input type="hidden" id="payment_method_nonce" name="payment_method_nonce" value="payment_method_nonce">
+  <input type="hidden" id="device_data" name="device_data" value="device_data">
+
+<div class="container-fluid" id="credit_card">
+  <div class="row">
+    <div class="col-md-4">
+      <br>
+      <br>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-md-4">
+      <div class="credit-card" id="card-number"></div>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-md-2">
+      <div class="expiration-date" id="expiration-date"></div>
+    </div>
+    <div class="col-md-2">
+      <div class="cvv" id="cvv"></div>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-md-4">
+    <button type="button" id="checkout_button" class="btn btn-primary">Pay with card</button>
+  </div>
+  </div>
+</div> -->
+
+<!-- Material Design inspired Hosted Fields theme -->
+
+<!-- Icons are taken from the material design library https://github.com/google/material-design-icons/ -->
+
+<!--[if IE 9]>
+<style>
+
+.panel {
+  margin: 2em auto 0;
+}
+
+</style>
+<![endif]-->
+
+<form id="cardForm">
+  <div class="panel">
+    <header class="panel__header">
+      <h1>Card Payment</h1>
+    </header>
+    <div class="panel__content">
+      <div class="textfield--float-label">
+        <!-- Begin hosted fields section -->
+        <label class="hosted-field--label" for="card-number"><span class="icon">
+         <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24"><path d="M0 0h24v24H0z" fill="none"/><path d="M20 4H4c-1.11 0-1.99.89-1.99 2L2 18c0 1.11.89 2 2 2h16c1.11 0 2-.89 2-2V6c0-1.11-.89-2-2-2zm0 14H4v-6h16v6zm0-10H4V6h16v2z"/></svg></span> Card Number
+        </label>
+        <div id="card-number" class="hosted-field"></div>
+        <!-- End hosted fields section -->
+      </div>
+      <div class="textfield--float-label">
+        <!-- Begin hosted fields section -->
+        <label class="hosted-field--label" for="expiration-date">
+           <span class="icon">
+          <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24"><path d="M9 11H7v2h2v-2zm4 0h-2v2h2v-2zm4 0h-2v2h2v-2zm2-7h-1V2h-2v2H8V2H6v2H5c-1.11 0-1.99.9-1.99 2L3 20c0 1.1.89 2 2 2h14c1.1 0 2-.9 2-2V6c0-1.1-.9-2-2-2zm0 16H5V9h14v11z"/></svg>
+         </span>
+          Expiration Date</label>
+        <div id="expiration-date" class="hosted-field"></div>
+        <!-- End hosted fields section -->
+      </div>
+      <div class="textfield--float-label">
+        <!-- Begin hosted fields section -->
+        <label class="hosted-field--label" for="cvv">
+          <span class="icon">
+            <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24"><path d="M18 8h-1V6c0-2.76-2.24-5-5-5S7 3.24 7 6v2H6c-1.1 0-2 .9-2 2v10c0 1.1.9 2 2 2h12c1.1 0 2-.9 2-2V10c0-1.1-.9-2-2-2zm-6 9c-1.1 0-2-.9-2-2s.9-2 2-2 2 .9 2 2-.9 2-2 2zm3.1-9H8.9V6c0-1.71 1.39-3.1 3.1-3.1 1.71 0 3.1 1.39 3.1 3.1v2z"/></svg>
+            </span>
+            CVV</label>
+        <div id="cvv" class="hosted-field"></div>
+        <!-- End hosted fields section -->
+      </div>
+      <div class="textfield--float-label">
+        <!-- Begin hosted fields section -->
+        <label class="hosted-field--label" for="postal-code">
+           <span class="icon">
+          <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24">
+    <path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7zm0 9.5c-1.38 0-2.5-1.12-2.5-2.5s1.12-2.5 2.5-2.5 2.5 1.12 2.5 2.5-1.12 2.5-2.5 2.5z"/></svg>
+         </span>
+          Postal Code</label>
+        <div id="postal-code" class="hosted-field"></div>
+        <!-- End hosted fields section -->
+      </div>
+    </div>
+    <footer class="panel__footer">
+      <button class="pay-button">Pay</button>
+    </footer>
+  </div>
+</form>
+
+
+
+<div id="paypal_form" class="row">
+  <div class="col-md-4"> </div>
+  <div class="col-md-4">
+     <div id="paypal-button"></div>
+  </div>
+  <div class="col-md-4"></div>
+</div>
+
+  <div id="visa_checkout_form" class="row">
+    <div class="col-md-4"> </div>
+    <div class="col-md-4">
+      <div id="visa-checkout-button">
+        <img alt="Visa Checkout" class="v-button" role="button"
+        src="https://sandbox.secure.checkout.visa.com/wallet-services-web/xo/button.png?cardBrands=VISA,MASTERCARD,DISCOVER,AMEX"/>
+        <script type="text/javascript"
+          src="https://sandbox-assets.secure.checkout.visa.com/checkout-widget/resources/js/integration/v1/sdk.js">
+        </script>
+      </div>
+    </div>
+   <div class="col-md-4"></div>
+   </div>
+
+   <div id="masterpass_form" class="row">
+     <div class="col-md-4"> </div>
+     <div class="col-md-4">
+       <div id="masterpass-button">
+         <a href="#">
+         <img alt="Checkout with Masterpass" role="button" src="https://static.masterpass.com/dyn/img/btn/global/mp_chk_btn_147x034px.svg" />
+         </a>
+      </div>
+     </div>
+    <div class="col-md-4"></div>
+    </div>
+
+    <div id="venmo_form" class="row">
+      <div class="col-md-4"> </div>
+      <div class="col-md-4">
+        <div id="venmo-button">
+          <a href="#">
+          <img alt="Checkout with Venmo" role="button" src="/blue_venmo_button_280x48.svg" />
+          </a>
+       </div>
+      </div>
+     <div class="col-md-4"></div>
+     </div>
+
+     <div id="ach_form" class="row">
+       <div class="col-md-4"> </div>
+       <div class="col-md-4">
+         <div>
+           <button type="button" id="bank-login-button" class="btn btn-primary">Pay with Bank</button>
+         <div>
+       </div>
+      <div class="col-md-4"></div>
+      </div>
+
+
+</form>
+
+<!-- <style>
+.cvv {
+  height: 36pt;
+  width: 50pt;
+  border: 2px ;
+  background-color: #ffffff;
+  border-radius: 5px;
+  margin: 5px;
+}
+.credit-card {
+  height: 36pt;
+  width: 150pt;
+  border: 2px ;
+  background-color: #ffffff;
+  border-radius: 5px;
+  margin: 5px;
+}
+.expiration-date {
+  height: 36pt;
+  width: 75pt;
+  border: 2px ;
+  background-color: #ffffff;
+  border-radius: 5px;
+  margin: 5px;
+}
+</style> -->
+
+<script>
+
+var masterpassButton = document.getElementById('masterpass-button');
+var submitButton = document.getElementById('checkout_button');
+var creditCardForm = document.getElementById('credit_card_form');
+var nonce = document.getElementById('payment_method_nonce');
+var paypalButton = document.querySelector('#paypal-button');
+var venmoButton = document.getElementById('venmo-button');
+var venmoRadioButton = document.getElementById("venmo_radio_button");
+var achButton = document.getElementById("bank-login-button");
+
+
+braintree.client.create({
+  authorization: '<%= @client_token %>'
+}, function (err, client) {
+
+  if (err) {
+    console.error('Error creating client:', err);
+    return;
+  }
+
+  braintree.hostedFields.create({
+    client: client,
+      styles: {
+        'input': {
+         'font-size': '14pt'
+      },
+     'input.invalid': {
+        'color': 'red'
+        },
+      'input.valid': {
+        'color': 'green'
+      }
+    },
+    fields: {
+      number: {
+        selector: '#card-number',
+        placeholder: '•••• •••• •••• ••••'
+      },
+      cvv: {
+        selector: '#cvv',
+        placeholder: "CVV"
+      },
+      expirationDate: {
+        selector: '#expiration-date',
+        placeholder: 'MM / YY'
+      }
+    }
+  }, function (err, hostedFields) {
+
+      if (err) {
+        console.error('Error creating Hosted Fields:', err);
+        return;
+      }
+
+      submitButton.removeAttribute('disabled');
+
+      hostedFields.on('fieldEvent', function (event) {
+        if (event.target.fieldKey !== 'number') { return; }
+
+        if (event.card) {
+          cvvLabel.innerHTML = event.card.code.name;
+        } else {
+          cvvLabel.innerHTML = 'CVV';
+        }
+      });
+
+      submitButton.onclick = function() {
+        event.preventDefault();
+        hostedFields.tokenize(function (err, payload) {
+        if (err) {
+          if (err.type === 'CUSTOMER') {
+            errorMessage.innerHTML = 'Your card info is invalid.';
+          } else {
+            console.error('Error tokenizing:', err);
+          }
+          return;
+        }
+      serverSubmit(payload);
+      });
+    }
+  });
+
+  braintree.usBankAccount.create({
+  client: client
+}, function (usBankAccountErr, usBankAccountInstance) {
+  // ...
+
+  achButton.addEventListener('click', function (event) {
+    event.preventDefault();
+
+    var bankLogin = {
+      displayName: 'My Merchant',
+      ownershipType: "personal",
+      billingAddress: {
+        streetAddress: "222 Merchandise Mart Plaza",
+        extendedAddress: "",
+        locality: "Chicago",
+        region: "US",
+        postalCode: "60625"
+      }
+    };
+
+    if (bankLogin.ownershipType === 'personal') {
+      bankLogin.firstName = "Jon";
+      bankLogin.lastName = "Snow";
+    } else {
+      bankLogin.businessName = "PayPal";
+    }
+
+    usBankAccountInstance.tokenize({
+      bankLogin: bankLogin,
+      mandateText: 'I authorize Braintree to debit my bank account on behalf of My Merchant.'
+    }, function (tokenizeErr, payload) {
+      if (tokenizeErr) {
+        console.error('There was an error tokenizing the bank details.');
+        throw tokenizeErr;
+      }
+      serverSubmit(payload);
+      // Submit tokenizedPayload.nonce to your server as you would
+      // other payment method nonces.
+    });
+  });
+});
+
+  braintree.paypalCheckout.create({
+    client: client
+    }, function (createErr, paypalCheckoutInstance) {
+      if (createErr) {
+        console.error('Error!', createErr);
+        return;
+      }
+
+      paypal.Button.render({
+        env: 'sandbox', // or 'sandbox'
+        locale: 'en_US',
+        style: {
+        size: 'small',
+        color: 'gold',
+        shape: 'pill'
+},
+
+        payment: function () {
+          return paypalCheckoutInstance.createPayment({
+            flow: 'checkout',
+            amount: '10.00',
+            displayName: "Dan's Produce",
+            currency: 'USD'
+          });
+        },
+
+        onAuthorize: function (data, actions) {
+          return paypalCheckoutInstance.tokenizePayment(data).then(function (payload) {
+          serverSubmit(payload);
+
+          });
+        },
+
+        onCancel: function (data) {
+          console.log('checkout.js payment cancelled', JSON.stringify(data, 0, 2));
+        },
+
+        onError: function (err) {
+          console.error('checkout.js error', err);
+        }
+      }, '#paypal-button'); // the PayPal button will be rendered in an html element with the id `paypal-button`
+    });
+
+
+
+
+    braintree.visaCheckout.create({
+      client: client
+      }, function (visaCheckoutErr, visaCheckoutInstance) {
+
+      if (visaCheckoutErr) {
+        document.getElementById("visa-checkout-button").style.display = 'none';
+        console.error('Error creating VisaCheckout:', visaCheckoutErr);
+        return;
+      }
+
+      visaCheckoutInitialized(visaCheckoutInstance);
+      });
+
+    braintree.masterpass.create({
+     client: client
+       }, function (masterpassErr, masterpassInstance) {
+        if (masterpassErr) {
+         console.error('Error creating Masterpass:', masterpassErr);
+         return;
+       }
+       masterpassAvailable(masterpassInstance);
+    });
+
+    braintree.venmo.create({
+     client: client,
+  // Add allowNewBrowserTab: false if your checkout page does not support
+  // relaunching in a new tab when returning from the Venmo app. This can
+  // be omitted otherwise.
+     allowNewBrowserTab: false
+     }, function (venmoErr, venmoInstance) {
+       if (venmoErr) {
+         console.error('Error creating Venmo:', venmoErr);
+         return;
+         }
+
+     // Verify browser support before proceeding.
+     if (venmoInstance.isBrowserSupported()) {
+        venmoRadioButton.style.display = "inline"
+        displayVenmoButton(venmoInstance);
+    return;
+  }
+
+
+
+
+
+  // Check if tokenization results already exist. This occurs when your
+  // checkout page is relaunched in a new tab. This step can be omitted
+  // if allowNewBrowserTab is false.
+  if (venmoInstance.hasTokenizationResult()) {
+    venmoInstance.tokenize(function (tokenizeErr, payload) {
+      if (err) {
+        handleVenmoError(tokenizeErr);
+      } else {
+        handleVenmoSuccess(payload);
+      }
+    });
+    return;
+  }
+});
+
+
+
+    braintree.dataCollector.create({
+      client: client,
+      kount: true,
+      paypal: true
+        }, function (err, dataCollectorInstance) {
+         if (err) {
+         // Handle error in creation of data collector
+        return;
+        }
+
+        $('#device_data').val(dataCollectorInstance.deviceData);
+    });
+});
+
+function displayVenmoButton(venmoInstance) {
+  console.log("got to displayVenmoButton");
+  // Assumes that venmoButton is initially display: none.
+  venmoButton.style.display = 'inline-block';
+  console.log("button should have new display properties");
+
+  venmoButton.addEventListener('click', function () {
+    venmoButton.disabled = true;
+
+    venmoInstance.tokenize(function (tokenizeErr, payload) {
+      venmoButton.removeAttribute('disabled');
+      if (tokenizeErr) {
+        console.log(tokenizeErr)
+      } else {
+      serverSubmit(payload);
+    }
+
+    });
+  });
+}
+
+function masterpassAvailable(masterpassInstance) {
+  masterpassButton.classList.remove('button-hidden');
+  var payment = {
+   currencyCode: 'USD',
+   subtotal: '10.00',
+   // Optional configurations. See https://developer.mastercard.com/page/masterpass-lightbox-parameters for all options.
+   config: {
+     suppressShippingAddressEnable: true
+   }
+ }
+
+ masterpassButton.addEventListener('click', function (event) {
+   masterpassInstance.tokenize(payment, function (tokenizeErr, payload) {
+     if (tokenizeErr) {
+       if (tokenizeErr.code === 'MASTERPASS_POPUP_CLOSED') {
+         console.log('Customer closed popup');
+       } else {
+         console.error('Error during Masterpass tokenization', tokenizeErr);
+       }
+       return;
+     }
+    serverSubmit(payload);
+   });
+ });
+};
+
+
+
+function visaCheckoutInitialized(visaCheckoutInstance) {
+  var baseInitOptions = {
+  paymentRequest: {
+  currencyCode: "USD",
+  subtotal: "10.00"
+},
+settings: {
+  collectShipping: "true"
+}
+};
+
+var initOptions = visaCheckoutInstance.createInitOptions(baseInitOptions);
+
+V.init(initOptions);
+
+V.on("payment.success", function (payment) {
+   visaCheckoutInstance.tokenize(payment, function (tokenizeErr, payload) {
+     if (tokenizeErr) {
+       console.error('Error during Visa Checkout tokenization', tokenizeErr);
+     } else {
+     // Send payload.nonce to your server, and create a transaction there.
+     serverSubmit(payload);
+    }
+ });
+});
+}
+
+
+
+function serverSubmit(payload) {
+  $('#payment_method_nonce').val(payload.nonce);
+  console.log(JSON.stringify(payload));
+  alert(JSON.stringify(payload));
+  document.getElementById("credit_card_form").submit();
+}
+
+function displayForm(c) {
+       if (c.value == "1") {
+           document.getElementById("credit_card").style.display = 'inline';
+           document.getElementById("checkout_button").style.display = 'inline';
+           document.getElementById("paypal_form").style.display = 'none';
+           document.getElementById("visa_checkout_form").style.display = 'none';
+           document.getElementById("masterpass_form").style.display = 'none';
+           document.getElementById("venmo_form").style.display = 'none';
+           document.getElementById("ach_form").style.display = 'none';
+       } else if (c.value == "2") {
+           document.getElementById("credit_card").style.display = 'none';
+           document.getElementById("checkout_button").style.display = 'none';
+           document.getElementById("paypal_form").style.display = 'inline';
+           document.getElementById("visa_checkout_form").style.display = 'none';
+           document.getElementById("masterpass_form").style.display = 'none';
+           document.getElementById("venmo_form").style.display = 'none';
+            document.getElementById("ach_form").style.display = 'none';
+       } else if (c.value == "3") {
+           document.getElementById("credit_card").style.display = 'none';
+           document.getElementById("checkout_button").style.display = 'none';
+           document.getElementById("paypal_form").style.display = 'none';
+           document.getElementById("visa_checkout_form").style.display = 'inline';
+           document.getElementById("masterpass_form").style.display = 'none';
+           document.getElementById("venmo_form").style.display = 'none';
+           document.getElementById("ach_form").style.display = 'none';
+       } else if (c.value == "4") {
+           document.getElementById("credit_card").style.display = 'none';
+           document.getElementById("checkout_button").style.display = 'none';
+           document.getElementById("paypal_form").style.display = 'none';
+           document.getElementById("visa_checkout_form").style.display = 'none';
+           document.getElementById("masterpass_form").style.display = 'inline';
+           document.getElementById("venmo_form").style.display = 'none';
+           document.getElementById("ach_form").style.display = 'none';
+        } else if (c.value == "5") {
+            document.getElementById("credit_card").style.display = 'none';
+            document.getElementById("checkout_button").style.display = 'none';
+            document.getElementById("paypal_form").style.display = 'none';
+            document.getElementById("visa_checkout_form").style.display = 'none';
+            document.getElementById("masterpass_form").style.display = 'none';
+            document.getElementById("venmo_form").style.display = 'inline';
+            document.getElementById("ach_form").style.display = 'none';
+         } else if (c.value == "6") {
+             document.getElementById("credit_card").style.display = 'none';
+             document.getElementById("checkout_button").style.display = 'none';
+             document.getElementById("paypal_form").style.display = 'none';
+             document.getElementById("visa_checkout_form").style.display = 'none';
+             document.getElementById("masterpass_form").style.display = 'none';
+             document.getElementById("venmo_form").style.display = 'none';
+             document.getElementById("ach_form").style.display = 'inline';
+        } else {}
+      }
+
+
+</script>
