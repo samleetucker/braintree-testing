@@ -169,8 +169,6 @@
   </div>
 </form>
 
-
-
 <div id="paypal_form" class="row">
   <div class="col-md-4"> </div>
   <div class="col-md-4">
@@ -313,6 +311,10 @@ braintree.client.create({
       expirationDate: {
         selector: '#expiration-date',
         placeholder: 'MM / YY'
+      },
+      postalCode: {
+        selector: '#postal-code',
+        placeholder: '90210'
       }
     }
   }, function (err, hostedFields) {
