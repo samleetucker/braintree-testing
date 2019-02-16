@@ -169,7 +169,7 @@
   </div>
 </form>
 
-<div id="paypal_form" class="row">
+<!-- <div id="paypal_form" class="row">
   <div class="col-md-4"> </div>
   <div class="col-md-4">
      <div id="paypal-button"></div>
@@ -224,9 +224,7 @@
        </div>
       <div class="col-md-4"></div>
       </div>
-
-
-</form>
+</form> -->
 
 <!-- <style>
 .cvv {
@@ -352,246 +350,242 @@ braintree.client.create({
     }
   });
 
-  braintree.usBankAccount.create({
-  client: client
-}, function (usBankAccountErr, usBankAccountInstance) {
-  // ...
+//   braintree.usBankAccount.create({
+//   client: client
+// }, function (usBankAccountErr, usBankAccountInstance) {
+//   // ...
+//
+//   achButton.addEventListener('click', function (event) {
+//     event.preventDefault();
+//
+//     var bankLogin = {
+//       displayName: 'My Merchant',
+//       ownershipType: "personal",
+//       billingAddress: {
+//         streetAddress: "222 Merchandise Mart Plaza",
+//         extendedAddress: "",
+//         locality: "Chicago",
+//         region: "US",
+//         postalCode: "60625"
+//       }
+//     };
+//
+//     if (bankLogin.ownershipType === 'personal') {
+//       bankLogin.firstName = "Jon";
+//       bankLogin.lastName = "Snow";
+//     } else {
+//       bankLogin.businessName = "PayPal";
+//     }
+//
+//     usBankAccountInstance.tokenize({
+//       bankLogin: bankLogin,
+//       mandateText: 'I authorize Braintree to debit my bank account on behalf of My Merchant.'
+//     }, function (tokenizeErr, payload) {
+//       if (tokenizeErr) {
+//         console.error('There was an error tokenizing the bank details.');
+//         throw tokenizeErr;
+//       }
+//       serverSubmit(payload);
+//       // Submit tokenizedPayload.nonce to your server as you would
+//       // other payment method nonces.
+//     });
+//   });
+// });
 
-  achButton.addEventListener('click', function (event) {
-    event.preventDefault();
-
-    var bankLogin = {
-      displayName: 'My Merchant',
-      ownershipType: "personal",
-      billingAddress: {
-        streetAddress: "222 Merchandise Mart Plaza",
-        extendedAddress: "",
-        locality: "Chicago",
-        region: "US",
-        postalCode: "60625"
-      }
-    };
-
-    if (bankLogin.ownershipType === 'personal') {
-      bankLogin.firstName = "Jon";
-      bankLogin.lastName = "Snow";
-    } else {
-      bankLogin.businessName = "PayPal";
-    }
-
-    usBankAccountInstance.tokenize({
-      bankLogin: bankLogin,
-      mandateText: 'I authorize Braintree to debit my bank account on behalf of My Merchant.'
-    }, function (tokenizeErr, payload) {
-      if (tokenizeErr) {
-        console.error('There was an error tokenizing the bank details.');
-        throw tokenizeErr;
-      }
-      serverSubmit(payload);
-      // Submit tokenizedPayload.nonce to your server as you would
-      // other payment method nonces.
-    });
-  });
-});
-
-  braintree.paypalCheckout.create({
-    client: client
-    }, function (createErr, paypalCheckoutInstance) {
-      if (createErr) {
-        console.error('Error!', createErr);
-        return;
-      }
-
-      paypal.Button.render({
-        env: 'sandbox', // or 'sandbox'
-        locale: 'en_US',
-        style: {
-        size: 'small',
-        color: 'gold',
-        shape: 'pill'
-},
-
-        payment: function () {
-          return paypalCheckoutInstance.createPayment({
-            flow: 'checkout',
-            amount: '10.00',
-            displayName: "Dan's Produce",
-            currency: 'USD'
-          });
-        },
-
-        onAuthorize: function (data, actions) {
-          return paypalCheckoutInstance.tokenizePayment(data).then(function (payload) {
-          serverSubmit(payload);
-
-          });
-        },
-
-        onCancel: function (data) {
-          console.log('checkout.js payment cancelled', JSON.stringify(data, 0, 2));
-        },
-
-        onError: function (err) {
-          console.error('checkout.js error', err);
-        }
-      }, '#paypal-button'); // the PayPal button will be rendered in an html element with the id `paypal-button`
-    });
-
-
-
-
-    braintree.visaCheckout.create({
-      client: client
-      }, function (visaCheckoutErr, visaCheckoutInstance) {
-
-      if (visaCheckoutErr) {
-        document.getElementById("visa-checkout-button").style.display = 'none';
-        console.error('Error creating VisaCheckout:', visaCheckoutErr);
-        return;
-      }
-
-      visaCheckoutInitialized(visaCheckoutInstance);
-      });
-
-    braintree.masterpass.create({
-     client: client
-       }, function (masterpassErr, masterpassInstance) {
-        if (masterpassErr) {
-         console.error('Error creating Masterpass:', masterpassErr);
-         return;
-       }
-       masterpassAvailable(masterpassInstance);
-    });
-
-    braintree.venmo.create({
-     client: client,
-  // Add allowNewBrowserTab: false if your checkout page does not support
-  // relaunching in a new tab when returning from the Venmo app. This can
-  // be omitted otherwise.
-     allowNewBrowserTab: false
-     }, function (venmoErr, venmoInstance) {
-       if (venmoErr) {
-         console.error('Error creating Venmo:', venmoErr);
-         return;
-         }
-
-     // Verify browser support before proceeding.
-     if (venmoInstance.isBrowserSupported()) {
-        venmoRadioButton.style.display = "inline"
-        displayVenmoButton(venmoInstance);
-    return;
-  }
+//   braintree.paypalCheckout.create({
+//     client: client
+//     }, function (createErr, paypalCheckoutInstance) {
+//       if (createErr) {
+//         console.error('Error!', createErr);
+//         return;
+//       }
+//
+//       paypal.Button.render({
+//         env: 'sandbox', // or 'sandbox'
+//         locale: 'en_US',
+//         style: {
+//         size: 'small',
+//         color: 'gold',
+//         shape: 'pill'
+// },
+//
+//         payment: function () {
+//           return paypalCheckoutInstance.createPayment({
+//             flow: 'checkout',
+//             amount: '10.00',
+//             displayName: "Dan's Produce",
+//             currency: 'USD'
+//           });
+//         },
+//
+//         onAuthorize: function (data, actions) {
+//           return paypalCheckoutInstance.tokenizePayment(data).then(function (payload) {
+//           serverSubmit(payload);
+//
+//           });
+//         },
+//
+//         onCancel: function (data) {
+//           console.log('checkout.js payment cancelled', JSON.stringify(data, 0, 2));
+//         },
+//
+//         onError: function (err) {
+//           console.error('checkout.js error', err);
+//         }
+//       }, '#paypal-button'); // the PayPal button will be rendered in an html element with the id `paypal-button`
+//     });
 
 
 
 
+    // braintree.visaCheckout.create({
+    //   client: client
+    //   }, function (visaCheckoutErr, visaCheckoutInstance) {
+    //
+    //   if (visaCheckoutErr) {
+    //     document.getElementById("visa-checkout-button").style.display = 'none';
+    //     console.error('Error creating VisaCheckout:', visaCheckoutErr);
+    //     return;
+    //   }
+    //
+    //   visaCheckoutInitialized(visaCheckoutInstance);
+    //   });
 
-  // Check if tokenization results already exist. This occurs when your
-  // checkout page is relaunched in a new tab. This step can be omitted
-  // if allowNewBrowserTab is false.
-  if (venmoInstance.hasTokenizationResult()) {
-    venmoInstance.tokenize(function (tokenizeErr, payload) {
-      if (err) {
-        handleVenmoError(tokenizeErr);
-      } else {
-        handleVenmoSuccess(payload);
-      }
-    });
-    return;
-  }
-});
+    // braintree.masterpass.create({
+    //  client: client
+    //    }, function (masterpassErr, masterpassInstance) {
+    //     if (masterpassErr) {
+    //      console.error('Error creating Masterpass:', masterpassErr);
+    //      return;
+    //    }
+    //    masterpassAvailable(masterpassInstance);
+    // });
 
-
-
-    braintree.dataCollector.create({
-      client: client,
-      kount: true,
-      paypal: true
-        }, function (err, dataCollectorInstance) {
-         if (err) {
-         // Handle error in creation of data collector
-        return;
-        }
-
-        $('#device_data').val(dataCollectorInstance.deviceData);
-    });
-});
-
-function displayVenmoButton(venmoInstance) {
-  console.log("got to displayVenmoButton");
-  // Assumes that venmoButton is initially display: none.
-  venmoButton.style.display = 'inline-block';
-  console.log("button should have new display properties");
-
-  venmoButton.addEventListener('click', function () {
-    venmoButton.disabled = true;
-
-    venmoInstance.tokenize(function (tokenizeErr, payload) {
-      venmoButton.removeAttribute('disabled');
-      if (tokenizeErr) {
-        console.log(tokenizeErr)
-      } else {
-      serverSubmit(payload);
-    }
-
-    });
-  });
-}
-
-function masterpassAvailable(masterpassInstance) {
-  masterpassButton.classList.remove('button-hidden');
-  var payment = {
-   currencyCode: 'USD',
-   subtotal: '10.00',
-   // Optional configurations. See https://developer.mastercard.com/page/masterpass-lightbox-parameters for all options.
-   config: {
-     suppressShippingAddressEnable: true
-   }
- }
-
- masterpassButton.addEventListener('click', function (event) {
-   masterpassInstance.tokenize(payment, function (tokenizeErr, payload) {
-     if (tokenizeErr) {
-       if (tokenizeErr.code === 'MASTERPASS_POPUP_CLOSED') {
-         console.log('Customer closed popup');
-       } else {
-         console.error('Error during Masterpass tokenization', tokenizeErr);
-       }
-       return;
-     }
-    serverSubmit(payload);
-   });
- });
-};
+//     braintree.venmo.create({
+//      client: client,
+//   // Add allowNewBrowserTab: false if your checkout page does not support
+//   // relaunching in a new tab when returning from the Venmo app. This can
+//   // be omitted otherwise.
+//      allowNewBrowserTab: false
+//      }, function (venmoErr, venmoInstance) {
+//        if (venmoErr) {
+//          console.error('Error creating Venmo:', venmoErr);
+//          return;
+//          }
+//
+//      // Verify browser support before proceeding.
+//      if (venmoInstance.isBrowserSupported()) {
+//         venmoRadioButton.style.display = "inline"
+//         displayVenmoButton(venmoInstance);
+//     return;
+//   }
+//
+//   // Check if tokenization results already exist. This occurs when your
+//   // checkout page is relaunched in a new tab. This step can be omitted
+//   // if allowNewBrowserTab is false.
+//   if (venmoInstance.hasTokenizationResult()) {
+//     venmoInstance.tokenize(function (tokenizeErr, payload) {
+//       if (err) {
+//         handleVenmoError(tokenizeErr);
+//       } else {
+//         handleVenmoSuccess(payload);
+//       }
+//     });
+//     return;
+//   }
+// });
 
 
 
-function visaCheckoutInitialized(visaCheckoutInstance) {
-  var baseInitOptions = {
-  paymentRequest: {
-  currencyCode: "USD",
-  subtotal: "10.00"
-},
-settings: {
-  collectShipping: "true"
-}
-};
+//     braintree.dataCollector.create({
+//       client: client,
+//       kount: true,
+//       paypal: true
+//         }, function (err, dataCollectorInstance) {
+//          if (err) {
+//          // Handle error in creation of data collector
+//         return;
+//         }
+//
+//         $('#device_data').val(dataCollectorInstance.deviceData);
+//     });
+// });
 
-var initOptions = visaCheckoutInstance.createInitOptions(baseInitOptions);
+// function displayVenmoButton(venmoInstance) {
+//   console.log("got to displayVenmoButton");
+//   // Assumes that venmoButton is initially display: none.
+//   venmoButton.style.display = 'inline-block';
+//   console.log("button should have new display properties");
+//
+//   venmoButton.addEventListener('click', function () {
+//     venmoButton.disabled = true;
+//
+//     venmoInstance.tokenize(function (tokenizeErr, payload) {
+//       venmoButton.removeAttribute('disabled');
+//       if (tokenizeErr) {
+//         console.log(tokenizeErr)
+//       } else {
+//       serverSubmit(payload);
+//     }
+//
+//     });
+//   });
+// }
 
-V.init(initOptions);
+// function masterpassAvailable(masterpassInstance) {
+//   masterpassButton.classList.remove('button-hidden');
+//   var payment = {
+//    currencyCode: 'USD',
+//    subtotal: '10.00',
+//    // Optional configurations. See https://developer.mastercard.com/page/masterpass-lightbox-parameters for all options.
+//    config: {
+//      suppressShippingAddressEnable: true
+//    }
+//  }
+//
+//  masterpassButton.addEventListener('click', function (event) {
+//    masterpassInstance.tokenize(payment, function (tokenizeErr, payload) {
+//      if (tokenizeErr) {
+//        if (tokenizeErr.code === 'MASTERPASS_POPUP_CLOSED') {
+//          console.log('Customer closed popup');
+//        } else {
+//          console.error('Error during Masterpass tokenization', tokenizeErr);
+//        }
+//        return;
+//      }
+//     serverSubmit(payload);
+//    });
+//  });
+// };
 
-V.on("payment.success", function (payment) {
-   visaCheckoutInstance.tokenize(payment, function (tokenizeErr, payload) {
-     if (tokenizeErr) {
-       console.error('Error during Visa Checkout tokenization', tokenizeErr);
-     } else {
-     // Send payload.nonce to your server, and create a transaction there.
-     serverSubmit(payload);
-    }
- });
-});
-}
+
+
+// function visaCheckoutInitialized(visaCheckoutInstance) {
+//   var baseInitOptions = {
+//   paymentRequest: {
+//   currencyCode: "USD",
+//   subtotal: "10.00"
+// },
+// settings: {
+//   collectShipping: "true"
+// }
+// };
+//
+// var initOptions = visaCheckoutInstance.createInitOptions(baseInitOptions);
+//
+// V.init(initOptions);
+//
+// V.on("payment.success", function (payment) {
+//    visaCheckoutInstance.tokenize(payment, function (tokenizeErr, payload) {
+//      if (tokenizeErr) {
+//        console.error('Error during Visa Checkout tokenization', tokenizeErr);
+//      } else {
+//      // Send payload.nonce to your server, and create a transaction there.
+//      serverSubmit(payload);
+//     }
+//  });
+// });
+// }
 
 
 
@@ -602,57 +596,57 @@ function serverSubmit(payload) {
   document.getElementById("credit_card_form").submit();
 }
 
-function displayForm(c) {
-       if (c.value == "1") {
-           document.getElementById("credit_card").style.display = 'inline';
-           document.getElementById("checkout_button").style.display = 'inline';
-           document.getElementById("paypal_form").style.display = 'none';
-           document.getElementById("visa_checkout_form").style.display = 'none';
-           document.getElementById("masterpass_form").style.display = 'none';
-           document.getElementById("venmo_form").style.display = 'none';
-           document.getElementById("ach_form").style.display = 'none';
-       } else if (c.value == "2") {
-           document.getElementById("credit_card").style.display = 'none';
-           document.getElementById("checkout_button").style.display = 'none';
-           document.getElementById("paypal_form").style.display = 'inline';
-           document.getElementById("visa_checkout_form").style.display = 'none';
-           document.getElementById("masterpass_form").style.display = 'none';
-           document.getElementById("venmo_form").style.display = 'none';
-            document.getElementById("ach_form").style.display = 'none';
-       } else if (c.value == "3") {
-           document.getElementById("credit_card").style.display = 'none';
-           document.getElementById("checkout_button").style.display = 'none';
-           document.getElementById("paypal_form").style.display = 'none';
-           document.getElementById("visa_checkout_form").style.display = 'inline';
-           document.getElementById("masterpass_form").style.display = 'none';
-           document.getElementById("venmo_form").style.display = 'none';
-           document.getElementById("ach_form").style.display = 'none';
-       } else if (c.value == "4") {
-           document.getElementById("credit_card").style.display = 'none';
-           document.getElementById("checkout_button").style.display = 'none';
-           document.getElementById("paypal_form").style.display = 'none';
-           document.getElementById("visa_checkout_form").style.display = 'none';
-           document.getElementById("masterpass_form").style.display = 'inline';
-           document.getElementById("venmo_form").style.display = 'none';
-           document.getElementById("ach_form").style.display = 'none';
-        } else if (c.value == "5") {
-            document.getElementById("credit_card").style.display = 'none';
-            document.getElementById("checkout_button").style.display = 'none';
-            document.getElementById("paypal_form").style.display = 'none';
-            document.getElementById("visa_checkout_form").style.display = 'none';
-            document.getElementById("masterpass_form").style.display = 'none';
-            document.getElementById("venmo_form").style.display = 'inline';
-            document.getElementById("ach_form").style.display = 'none';
-         } else if (c.value == "6") {
-             document.getElementById("credit_card").style.display = 'none';
-             document.getElementById("checkout_button").style.display = 'none';
-             document.getElementById("paypal_form").style.display = 'none';
-             document.getElementById("visa_checkout_form").style.display = 'none';
-             document.getElementById("masterpass_form").style.display = 'none';
-             document.getElementById("venmo_form").style.display = 'none';
-             document.getElementById("ach_form").style.display = 'inline';
-        } else {}
-      }
+// function displayForm(c) {
+//        if (c.value == "1") {
+//            document.getElementById("credit_card").style.display = 'inline';
+//            document.getElementById("checkout_button").style.display = 'inline';
+//            document.getElementById("paypal_form").style.display = 'none';
+//            document.getElementById("visa_checkout_form").style.display = 'none';
+//            document.getElementById("masterpass_form").style.display = 'none';
+//            document.getElementById("venmo_form").style.display = 'none';
+//            document.getElementById("ach_form").style.display = 'none';
+//        } else if (c.value == "2") {
+//            document.getElementById("credit_card").style.display = 'none';
+//            document.getElementById("checkout_button").style.display = 'none';
+//            document.getElementById("paypal_form").style.display = 'inline';
+//            document.getElementById("visa_checkout_form").style.display = 'none';
+//            document.getElementById("masterpass_form").style.display = 'none';
+//            document.getElementById("venmo_form").style.display = 'none';
+//             document.getElementById("ach_form").style.display = 'none';
+//        } else if (c.value == "3") {
+//            document.getElementById("credit_card").style.display = 'none';
+//            document.getElementById("checkout_button").style.display = 'none';
+//            document.getElementById("paypal_form").style.display = 'none';
+//            document.getElementById("visa_checkout_form").style.display = 'inline';
+//            document.getElementById("masterpass_form").style.display = 'none';
+//            document.getElementById("venmo_form").style.display = 'none';
+//            document.getElementById("ach_form").style.display = 'none';
+//        } else if (c.value == "4") {
+//            document.getElementById("credit_card").style.display = 'none';
+//            document.getElementById("checkout_button").style.display = 'none';
+//            document.getElementById("paypal_form").style.display = 'none';
+//            document.getElementById("visa_checkout_form").style.display = 'none';
+//            document.getElementById("masterpass_form").style.display = 'inline';
+//            document.getElementById("venmo_form").style.display = 'none';
+//            document.getElementById("ach_form").style.display = 'none';
+//         } else if (c.value == "5") {
+//             document.getElementById("credit_card").style.display = 'none';
+//             document.getElementById("checkout_button").style.display = 'none';
+//             document.getElementById("paypal_form").style.display = 'none';
+//             document.getElementById("visa_checkout_form").style.display = 'none';
+//             document.getElementById("masterpass_form").style.display = 'none';
+//             document.getElementById("venmo_form").style.display = 'inline';
+//             document.getElementById("ach_form").style.display = 'none';
+//          } else if (c.value == "6") {
+//              document.getElementById("credit_card").style.display = 'none';
+//              document.getElementById("checkout_button").style.display = 'none';
+//              document.getElementById("paypal_form").style.display = 'none';
+//              document.getElementById("visa_checkout_form").style.display = 'none';
+//              document.getElementById("masterpass_form").style.display = 'none';
+//              document.getElementById("venmo_form").style.display = 'none';
+//              document.getElementById("ach_form").style.display = 'inline';
+//         } else {}
+//       }
 
 
 </script>
