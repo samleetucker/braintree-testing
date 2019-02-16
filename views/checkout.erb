@@ -1,4 +1,4 @@
-<link rel="stylesheet" type="text/css" href="./style.css">
+
 
 <!-- MAIN -->
 <script src="https://js.braintreegateway.com/web/3.42.0/js/client.min.js"></script>
@@ -116,16 +116,6 @@
 <!-- Material Design inspired Hosted Fields theme -->
 
 <!-- Icons are taken from the material design library https://github.com/google/material-design-icons/ -->
-
-<!--[if IE 9]>
-<style>
-
-.panel {
-  margin: 2em auto 0;
-}
-
-</style>
-<![endif]-->
 
 <form id="cardForm">
   <div class="panel">
@@ -279,6 +269,8 @@ var venmoRadioButton = document.getElementById("venmo_radio_button");
 var achButton = document.getElementById("bank-login-button");
 
 
+
+
 braintree.client.create({
   authorization: '<%= @client_token %>'
 }, function (err, client) {
@@ -288,19 +280,27 @@ braintree.client.create({
     return;
   }
 
+
+
   braintree.hostedFields.create({
     client: client,
-      styles: {
-        'input': {
-         'font-size': '14pt'
-      },
-     'input.invalid': {
-        'color': 'red'
-        },
-      'input.valid': {
-        'color': 'green'
-      }
+    styles: {
+    'input': {
+      'font-size': '16px',
+      'font-family': 'roboto, verdana, sans-serif',
+      'font-weight': 'lighter',
+      'color': 'black'
     },
+    ':focus': {
+      'color': 'black'
+    },
+    '.valid': {
+      'color': 'black'
+    },
+    '.invalid': {
+      'color': 'black'
+    }
+  },
     fields: {
       number: {
         selector: '#card-number',
