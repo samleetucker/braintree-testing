@@ -207,21 +207,19 @@ var nonce = document.getElementById('payment_method_nonce');
 // var achButton = document.getElementById("bank-login-button");
 
 braintree.client.create({
+  // Replace this with your own authorization.
   authorization: '<%= @client_token %>'
-}, function (err, client) {
-
-  if (err) {
-    console.error('Error creating client:', err);
+}, function (clientErr, clientInstance) {
+  if (clientErr) {
+    console.log(clientErr)
     return;
   }
-}
-)
-
+  console.log(clientInstance)
 
 // SETUP HOSTED FIELDS
 
 braintree.hostedFields.create({
-  client: client,
+  client: clientInstance,
     styles: {
     'input': {
       'font-size': '16px',
@@ -293,7 +291,7 @@ braintree.hostedFields.create({
   });
 
 //   braintree.usBankAccount.create({
-//   client: client
+//   client: clientInstance
 // }, function (usBankAccountErr, usBankAccountInstance) {
 //   // ...
 //
@@ -335,7 +333,7 @@ braintree.hostedFields.create({
 // });
 
 //   braintree.paypalCheckout.create({
-//     client: client
+//     client: clientInstance
 //     }, function (createErr, paypalCheckoutInstance) {
 //       if (createErr) {
 //         console.error('Error!', createErr);
@@ -381,7 +379,7 @@ braintree.hostedFields.create({
 
 
     // braintree.visaCheckout.create({
-    //   client: client
+    //   client: clientInstance
     //   }, function (visaCheckoutErr, visaCheckoutInstance) {
     //
     //   if (visaCheckoutErr) {
@@ -394,7 +392,7 @@ braintree.hostedFields.create({
     //   });
 
     // braintree.masterpass.create({
-    //  client: client
+    //  client: clientInstance
     //    }, function (masterpassErr, masterpassInstance) {
     //     if (masterpassErr) {
     //      console.error('Error creating Masterpass:', masterpassErr);
@@ -404,7 +402,7 @@ braintree.hostedFields.create({
     // });
 
 //     braintree.venmo.create({
-//      client: client,
+//      client: clientInstance,
 //   // Add allowNewBrowserTab: false if your checkout page does not support
 //   // relaunching in a new tab when returning from the Venmo app. This can
 //   // be omitted otherwise.
@@ -440,7 +438,7 @@ braintree.hostedFields.create({
 
 
 //     braintree.dataCollector.create({
-//       client: client,
+//       client: clientInstance,
 //       kount: true,
 //       paypal: true
 //         }, function (err, dataCollectorInstance) {
