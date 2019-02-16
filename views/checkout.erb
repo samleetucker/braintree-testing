@@ -81,38 +81,6 @@
    <div class="col-md-4"></div>
  </div> -->
 
-
-<!-- <form id="credit_card_form"  method="post" action="/checkout" role="form">
-  <input type="hidden" id="payment_method_nonce" name="payment_method_nonce" value="payment_method_nonce">
-  <input type="hidden" id="device_data" name="device_data" value="device_data">
-
-<div class="container-fluid" id="credit_card">
-  <div class="row">
-    <div class="col-md-4">
-      <br>
-      <br>
-    </div>
-  </div>
-  <div class="row">
-    <div class="col-md-4">
-      <div class="credit-card" id="card-number"></div>
-    </div>
-  </div>
-  <div class="row">
-    <div class="col-md-2">
-      <div class="expiration-date" id="expiration-date"></div>
-    </div>
-    <div class="col-md-2">
-      <div class="cvv" id="cvv"></div>
-    </div>
-  </div>
-  <div class="row">
-    <div class="col-md-4">
-    <button type="button" id="checkout_button" class="btn btn-primary">Pay with card</button>
-  </div>
-  </div>
-</div> -->
-
 <!-- Material Design inspired Hosted Fields theme -->
 
 <!-- Icons are taken from the material design library https://github.com/google/material-design-icons/ -->
@@ -255,16 +223,14 @@
 
 <script>
 
-var masterpassButton = document.getElementById('masterpass-button');
-var submitButton = document.getElementById('checkout_button');
-var creditCardForm = document.getElementById('credit_card_form');
-var nonce = document.getElementById('payment_method_nonce');
-var paypalButton = document.querySelector('#paypal-button');
-var venmoButton = document.getElementById('venmo-button');
-var venmoRadioButton = document.getElementById("venmo_radio_button");
-var achButton = document.getElementById("bank-login-button");
-
-
+// var masterpassButton = document.getElementById('masterpass-button');
+// var submitButton = document.getElementById('checkout_button');
+// var creditCardForm = document.getElementById('credit_card_form');
+// var nonce = document.getElementById('payment_method_nonce');
+// var paypalButton = document.querySelector('#paypal-button');
+// var venmoButton = document.getElementById('venmo-button');
+// var venmoRadioButton = document.getElementById("venmo_radio_button");
+// var achButton = document.getElementById("bank-login-button");
 
 
 braintree.client.create({
@@ -276,7 +242,7 @@ braintree.client.create({
     return;
   }
 
-
+// SETUP HOSTED FIELDS
 
   braintree.hostedFields.create({
     client: client,
@@ -291,10 +257,10 @@ braintree.client.create({
       'color': 'black'
     },
     '.valid': {
-      'color': 'black'
+      'color': 'green'
     },
     '.invalid': {
-      'color': 'black'
+      'color': 'red'
     }
   },
     fields: {
@@ -304,7 +270,7 @@ braintree.client.create({
       },
       cvv: {
         selector: '#cvv',
-        placeholder: "CVV"
+        placeholder: 'CVV'
       },
       expirationDate: {
         selector: '#expiration-date',
@@ -313,7 +279,7 @@ braintree.client.create({
       postalCode: {
         selector: '#postal-code',
         placeholder: '90210'
-      }
+      },
     }
   }, function (err, hostedFields) {
 
