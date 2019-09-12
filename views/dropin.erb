@@ -9,12 +9,13 @@
 
     braintree.dropin.create({
       authorization: '<%= @client_token %>',
-      selector: '#dropin-container',
+      container: '#dropin-container',
       paypal: {
         flow: 'checkout',
         amount: '10.00',
         currency: 'USD'
       },
+      venmo: {},
       dataCollector: {
         kount: true // Required if Kount fraud data collection is enabled
       }
