@@ -1,3 +1,3 @@
 source "https://rubygems.org"
 gem 'sinatra'
-gem 'braintree'
+gem "braintree", "~> 2.100.0"
