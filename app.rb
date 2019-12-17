@@ -12,7 +12,7 @@ Braintree::Configuration.private_key = 'ec2f1b7a2333e010a7d8e7193a8d68bc'
 
 get '/' do
     @client_token = Braintree::ClientToken.generate(
-      :customer_id => 88155713
+      # :customer_id => 88155713
     )
     erb :checkout
 end
